@@ -1,10 +1,10 @@
-<!-- TITLE: Order Schema -->
-<!-- SUBTITLE: Order Schema Documentation -->
+<!-- TITLE: Order Schema Documentation -->
+<!-- SUBTITLE: Description of standard order field usage -->
 
-# Order Schema
+# Order Schema Documentation
+## Solidity Struct
 
 ```javascript
-/* An order on the exchange. */
 struct Order {
     /* Exchange address, intended as a versioning mechanism. */
     address exchange;
