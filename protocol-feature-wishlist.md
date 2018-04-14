@@ -5,3 +5,5 @@
 
 * Methods of sale
 	* English Auction (requires asset escrow to prevent griefing attacks)
+* Order kinds
+  * Transaction to transaction, directly without ERC20 intermediation
