@@ -4,6 +4,8 @@
 
 Public wiki for [Project Wyvern](https://projectwyvern.com).
 
+Interested in the Wyvern Protocol? Read the [Protocol Overview](/protocol-overview).
+
 Coming soon:
 
 * [Wyvern Protocol](https://github.com/projectwyvern/wyvern-ethereum) developer documentation
