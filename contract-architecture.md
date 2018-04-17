@@ -15,5 +15,8 @@ The *[ProxyRegistry](https://github.com/ProjectWyvern/wyvern-ethereum/blob/maste
 ## Exchange
 The [exchange contracts](https://github.com/ProjectWyvern/wyvern-ethereum/tree/master/contracts/exchange) implement logic for both order validation — metadata agreement, signature verification, price calculation, calldata unification — and order execution — token transfer, proxy contract retrieval, call execution, and replay prevention.
 ### Exchange
+The *[Exchange](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/exchange/Exchange.sol)* contract simply wraps the *ExchangeCore* internal functions with public functions exposing arrays instead of structs, as Solidity's external struct ABI support is not yet finalized.
 ### ExchangeCore
+The *[ExchangeCore](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/exchange/ExchangeCore.sol)* contract is the workhorse of the Wyvern Protocol and contains all the juicy logic.
 ### SaleKindInterface
+The *[SaleKindInterface](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/exchange/SaleKindInterface.sol)* contract abstracts over order price calculation methods. Currently, only fixed-price and Dutch auction pricing methods are supported, but future protocol versions may add more (see the [wishlist](feature-wishlist)).
