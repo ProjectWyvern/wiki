@@ -8,6 +8,8 @@ Looking for a user-friendly overview of the project? Head on over to the [Projec
 
 Interested in technical details of the protocol? Read the [Protocol Overview](/protocol-overview).
 
+Want to list your assets on the Wyvern Exchange? Submit this [inquiry form]().
+
 Coming soon:
 
 * [Wyvern Protocol](https://github.com/projectwyvern/wyvern-ethereum) developer documentation
