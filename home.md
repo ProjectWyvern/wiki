@@ -17,4 +17,4 @@ Coming soon:
 * [Wyvern Exchange](https://exchange.projectwyvern.com) user guides
 * [Wyvern DAO](https://dao.projectwyvern.com) shareholder best practices
 
-Want write access? Login using Github and message Protinam on Riot/Discord.
+Contact us if you would like write access to this wiki.
