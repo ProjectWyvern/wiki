@@ -7,7 +7,7 @@ Wyvern is a protocol for the decentralized exchange of nonfungible digital asset
 
 The protocol is deployed as [a set of Solidity smart contracts](https://github.com/ProjectWyvern/wyvern-ethereum) on the Ethereum mainnet, with provision for automatic upgrades enacted by the [Wyvern DAO](https://dao.projectwyvern.com). All deployed mainnet versions have undergone third-party audit, and Wyvern is used in production by the [Wyvern Exchange](https://exchange.projectwyvern.com).
 # Protocol Reference
-- [Contract Layout](/contract-architecture)
+- [Contract Architecture](/contract-architecture)
 - [Order Schema](/order-schema)
 # Examples / Tutorials
 
