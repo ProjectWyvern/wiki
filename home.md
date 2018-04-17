@@ -10,8 +10,6 @@ Interested in technical details of the protocol? Read the [Protocol Overview](pr
 
 Want to list your assets on the Wyvern Exchange? Submit this [inquiry form](https://exchange.projectwyvern.com/inquire).
 
-Trying to figure out how to use the Wyvern Exchange? Check out [Exchange Tutorials]().
-
 Coming soon:
 
 * [Wyvern Exchange](wyvern-exchange) user guides
