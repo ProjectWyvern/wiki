@@ -9,7 +9,9 @@ The protocol is deployed as [a set of Solidity smart contracts](https://github.c
 # Protocol Reference
 - [Contract Architecture](/contract-architecture)
 - [Order Schema](/order-schema)
-# Examples / Tutorials
+# Tutorials
+Coming soon!
+# Examples
 ## Marketplaces
 - [Wyvern Exchange sourcecode](https://github.com/ProjectWyvern/exchange.projectwyvern.com)
 ## Automation
