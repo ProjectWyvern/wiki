@@ -10,6 +10,12 @@ The protocol is deployed as [a set of Solidity smart contracts](https://github.c
 - [Contract Architecture](/contract-architecture)
 - [Order Schema](/order-schema)
 # Examples / Tutorials
+## Marketplaces
+- [Wyvern Exchange sourcecode](https://github.com/ProjectWyvern/exchange.projectwyvern.com)
+## Automation
+- [CryptoKitties resale script](https://github.com/ProjectWyvern/automation/tree/master/cryptokitties-resale)
+## External Integrations
+- [Discord chatbot](https://github.com/ProjectWyvern/integrations/tree/master/discord)
 
 [0]: https://etherdelta.com
 [1]: https://0xproject.com
