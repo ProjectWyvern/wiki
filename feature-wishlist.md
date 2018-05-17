@@ -5,6 +5,7 @@
 
 * Methods of sale
 	* English Auction (requires asset escrow to prevent griefing attacks)
+	* Second-price Vickrey auction
 * Order kinds
   * Transaction to transaction, directly without ERC20 intermediation
   * Fungible to fungible, without necessarily requiring the ERC20 spec
