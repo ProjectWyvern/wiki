@@ -2,7 +2,7 @@
 <!-- SUBTITLE: How to integrate Wyvern into your Ethereum website or project. -->
 
 # Integration Guide
-Interested in using Wyvern to provide asset exchange functionality for your users?
+Interested in using the Wyvern Protocol to provide asset exchange functionality for your users?
 
 You're in luck! Integrating Wyvern is:
 
