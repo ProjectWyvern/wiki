@@ -6,7 +6,9 @@ You have reached the public wiki for the Wyvern Protocol.
 
 Looking for a user-friendly overview of the project? Head on over to the [Project Wyvern](https://projectwyvern.com) website.
 
-Interested in technical details of the protocol? Read the [Protocol Overview](protocol-overview).
+Trying to integrate Wyvern into your own DApp? Read the [Integration Guide](integration-guide).
+
+Interested in technical details of the protocol? See the [Protocol Overview](protocol-overview).
 
 Have suggestions for the next version of Wyvern? Check out the [Feature Wishlist](feature-wishlist).
 
