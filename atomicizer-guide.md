@@ -21,4 +21,59 @@ For each index, in series, the library parses out the calldata for that index th
 require(addrs[i].call.value(values[i])(calldata));
 ```
 
-This means that execution is "all-or-nothing": if any of the operations fail, the Atomicizer library will stop execution, refund remaining gas, and throw an error, reverting all previous state changes - so, if you atomicize three `transfer` calls of individual CryptoKitties, either all of the CryptoKitties will be transferred or none of them will.
+This means that execution is "all-or-nothing". If any of the operations fail, the Atomicizer library will stop execution, refund remaining gas, and throw an error, reverting all previous state changes - so, if you atomicize three `transfer` calls of individual CryptoKitties, either all of the CryptoKitties will be transferred or none of them will.
+
+## Usage
+
+Using a standard web3 API library, construct the transactions as you would normally, but instead of calling `send()`, call `encodeABI()` and then pass them to the Atomicizer, as follows:
+
+```javascript
+const atomicizerAddress = '0xC99f70bFD82fb7c8f8191fdfbFB735606b15e5c5' // wyvernatomicizer.eth
+const atomicize = {'constant': false, 'inputs': [{'name': 'addrs', 'type': 'address[]'}, {'name': 'values', 'type': 'uint256[]'}, {'name': 'calldataLengths', 'type': 'uint256[]'}, {'name': 'calldatas', 'type': 'bytes'}], 'name': 'atomicize', 'outputs': [], 'payable': false, 'stateMutability': 'nonpayable', 'type': 'function'}
+
+const transactions = [
+   {calldata: '...', value: '...', address: '...'},
+	 ...
+]
+
+const params = [
+  transactions.map(t => t.address),
+  transactions.map(t => t.value),
+  transactions.map(t => t.calldata.length - 2), // subtract 2 for '0x'
+  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2))
+]
+
+const encoded = web3.eth.abi.encodeFunctionCall(atomicize, params)
+```
+
+## Examples
+
+### Sending 0.001 Ether to two addresses in the same transaction
+
+```javascript
+const Web3 = require('web3')
+const web3 = new Web3()
+
+const atomicizerAddress = '0xC99f70bFD82fb7c8f8191fdfbFB735606b15e5c5' // wyvernatomicizer.eth
+const atomicize = {'constant': false, 'inputs': [{'name': 'addrs', 'type': 'address[]'}, {'name': 'values', 'type': 'uint256[]'}, {'name': 'calldataLengths', 'type': 'uint256[]'}, {'name': 'calldatas', 'type': 'bytes'}], 'name': 'atomicize', 'outputs': [], 'payable': false, 'stateMutability': 'nonpayable', 'type': 'function'}
+
+const transactions = [
+  {calldata: '0x', value: web3.utils.toWei(0.001), address: '0x0084a81668b9a978416abeb88bc1572816cc7cac'}, // send 0.001 Ether to 0x0084a81668b9a978416abeb88bc1572816cc7cac
+  {calldata: '0x', value: web3.utils.toWei(0.001), address: '0xa839D4b5A36265795EbA6894651a8aF3d0aE2e68'}  // send 0.001 Ether to 0xa839D4b5A36265795EbA6894651a8aF3d0aE2e68
+]
+
+const params = [
+  transactions.map(t => t.address),
+  transactions.map(t => t.value),
+  transactions.map(t => t.calldata.length - 2), // subtract 2 for '0x'
+  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2))
+]
+
+console.log(params)
+
+const encoded = web3.eth.abi.encodeFunctionCall(atomicize, params)
+
+console.log(atomicizerAddress, encoded)
+```
+
+Sent through a Wyvern authenticated proxy contract in [0xf74abfddc49b25b6d64e88b49e34573a6c9e5cab65f85206de236f16a89b15c9](https://etherscan.io/tx/0xf74abfddc49b25b6d64e88b49e34573a6c9e5cab65f85206de236f16a89b15c9).
