@@ -4,3 +4,11 @@
 # Wyvern Atomicizer Guide
 
 The Wyvern Atomicizer libary - ([Etherscan](https://etherscan.io/address/wyvernatomicizer.eth), [Solidity code](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/WyvernAtomicizer.sol)) - provides a generic way to dynamically combine multiple CALL operations into a single transaction. This may be useful in situations where you want to execute multiple operations atomically, such as selling three CryptoKitties in a single order, deploying a contract and setting an ENS address record, or calling ERC20 `approve` and `transferFrom` with one transaction.
+
+## ABI Usage
+
+The Atomicizer contract is a library - so you can only DELEGATECALL to it - exposing just one function:
+
+```solidity
+function atomicize (address[] addrs, uint[] values, uint[] calldataLengths, bytes calldatas)
+```
