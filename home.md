@@ -14,6 +14,10 @@ Have suggestions for the next version of Wyvern? Check out the [Feature Wishlist
 
 Want to list your assets on the Wyvern Exchange? Submit this [inquiry form](https://exchange.projectwyvern.com/inquire).
 
+Other information:
+
+* [Wyvern Atomicizer usage guide](atomicizer-guide)
+
 Coming soon:
 
 * [Wyvern Exchange](wyvern-exchange) user guides
