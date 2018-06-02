@@ -48,6 +48,8 @@ const encoded = web3.eth.abi.encodeFunctionCall(atomicize, params)
 
 ## Examples
 
+Any combination of transactions (within the Ethereum block gas limit) can be atomicized, the following are just a few examples.
+
 ### Sending 0.001 Ether to two addresses in the same transaction
 
 ```javascript
