@@ -40,7 +40,7 @@ const params = [
   transactions.map(t => t.address),
   transactions.map(t => t.value),
   transactions.map(t => t.calldata.length - 2), // subtract 2 for '0x'
-  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2))
+  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
 ]
 
 const encoded = web3.eth.abi.encodeFunctionCall(atomicize, params)
@@ -66,7 +66,7 @@ const params = [
   transactions.map(t => t.address),
   transactions.map(t => t.value),
   transactions.map(t => t.calldata.length - 2), // subtract 2 for '0x'
-  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2))
+  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
 ]
 
 console.log(params)
