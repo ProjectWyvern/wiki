@@ -52,6 +52,8 @@ Any combination of transactions (within the Ethereum block gas limit) can be ato
 
 ### Sending 0.001 Ether to two addresses in the same transaction
 
+Sent through a Wyvern authenticated proxy contract in [0xf74abfddc49b25b6d64e88b49e34573a6c9e5cab65f85206de236f16a89b15c9](https://etherscan.io/tx/0xf74abfddc49b25b6d64e88b49e34573a6c9e5cab65f85206de236f16a89b15c9).
+
 ```javascript
 const Web3 = require('web3')
 const web3 = new Web3()
@@ -78,4 +80,4 @@ const encoded = web3.eth.abi.encodeFunctionCall(atomicize, params)
 console.log(atomicizerAddress, encoded)
 ```
 
-Sent through a Wyvern authenticated proxy contract in [0xf74abfddc49b25b6d64e88b49e34573a6c9e5cab65f85206de236f16a89b15c9](https://etherscan.io/tx/0xf74abfddc49b25b6d64e88b49e34573a6c9e5cab65f85206de236f16a89b15c9).
+### Selling two CryptoKitties with one Wyvern v2 order
