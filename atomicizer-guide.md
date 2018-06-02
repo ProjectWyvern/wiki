@@ -81,3 +81,5 @@ console.log(atomicizerAddress, encoded)
 ```
 
 ### Selling two CryptoKitties with one Wyvern v2 order
+
+Matched by <> in <>. This example uses the [wyvern-js](https://github.com/ProjectWyvern/wyvern-js) library.
