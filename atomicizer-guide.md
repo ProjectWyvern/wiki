@@ -62,8 +62,8 @@ const atomicizerAddress = '0xC99f70bFD82fb7c8f8191fdfbFB735606b15e5c5' // wyvern
 const atomicize = {'constant': false, 'inputs': [{'name': 'addrs', 'type': 'address[]'}, {'name': 'values', 'type': 'uint256[]'}, {'name': 'calldataLengths', 'type': 'uint256[]'}, {'name': 'calldatas', 'type': 'bytes'}], 'name': 'atomicize', 'outputs': [], 'payable': false, 'stateMutability': 'nonpayable', 'type': 'function'}
 
 const transactions = [
-  {calldata: '0x', value: web3.utils.toWei(0.001), address: '0x0084a81668b9a978416abeb88bc1572816cc7cac'}, // send 0.001 Ether to 0x0084a81668b9a978416abeb88bc1572816cc7cac
-  {calldata: '0x', value: web3.utils.toWei(0.001), address: '0xa839D4b5A36265795EbA6894651a8aF3d0aE2e68'}  // send 0.001 Ether to 0xa839D4b5A36265795EbA6894651a8aF3d0aE2e68
+  {calldata: '0x', value: web3.utils.toWei('0.001'), address: '0x0084a81668b9a978416abeb88bc1572816cc7cac'}, // send 0.001 Ether to 0x0084a81668b9a978416abeb88bc1572816cc7cac
+  {calldata: '0x', value: web3.utils.toWei('0.001'), address: '0xa839D4b5A36265795EbA6894651a8aF3d0aE2e68'}  // send 0.001 Ether to 0xa839D4b5A36265795EbA6894651a8aF3d0aE2e68
 ]
 
 const params = [
