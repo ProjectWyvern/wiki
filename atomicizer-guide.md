@@ -48,7 +48,7 @@ const encoded = web3.eth.abi.encodeFunctionCall(atomicize, params)
 
 ## Examples
 
-### Sending 0.001 Ether to two addresses in the same transaction
+#### Sending 0.001 Ether to two addresses in the same transaction
 
 ```javascript
 const Web3 = require('web3')
