@@ -3,7 +3,7 @@
 
 # Wyvern Atomicizer Guide
 
-The Wyvern Atomicizer libary - ([Etherscan](https://etherscan.io/address/wyvernatomicizer.eth), [Solidity code](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/WyvernAtomicizer.sol)) - provides a generic way to dynamically combine multiple CALL operations into a single transaction. This may be useful in situations where you want to execute multiple operations atomically, such as selling three CryptoKitties in a single order, deploying a contract and setting an ENS address record, or calling ERC20 `approve` and `transferFrom` with one transaction.
+The Wyvern Atomicizer libary - ([Etherscan](https://etherscan.io/address/wyvernatomicizer.eth), [Solidity code](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/WyvernAtomicizer.sol)) - provides a generic way to dynamically combine multiple CALL operations into a single transaction. This may be useful in situations where you want to execute multiple operations atomically, such as selling three CryptoKitties in a single order, deploying a contract and setting an ENS address record, or calling ERC20 `approve` and `transferFrom` with one transaction instead of two. In order to use the Atomicizer library, you must call it from an account capable of executing the `DELEGATECALL` opcode - so standard Ethereum accounts will not work, but Wyvern registry proxy accounts ([code](https://github.com/ProjectWyvern/wyvern-ethereum/blob/master/contracts/registry/AuthenticatedProxy.sol)) or user-authenticated contracts ([proposal](https://ethereum-magicians.org/t/erc-1077-and-erc-1078-the-magic-of-executable-signed-messages-to-login-and-do-actions/351/9?u=cwgoes)) will.
 
 ## Basics
 
