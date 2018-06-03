@@ -82,7 +82,7 @@ console.log(atomicizerAddress, encoded)
 
 ### Selling two CryptoKitties with one Wyvern v2 order
 
-Matched in [0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47](https://etherscan.io/tx/0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47). This example uses the [wyvern-js](https://github.com/ProjectWyvern/wyvern-js) library.
+Matched in [0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47](https://etherscan.io/tx/0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47). This example uses the [wyvern-js](https://github.com/ProjectWyvern/wyvern-js) library. Checking the [event logs](https://etherscan.io/tx/0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47#eventlog) on Etherscan, you can easily see that both kitties were transferred.
 
 ```javascript
 const deepcopy = require('deepcopy')
