@@ -82,4 +82,117 @@ console.log(atomicizerAddress, encoded)
 
 ### Selling two CryptoKitties with one Wyvern v2 order
 
-Matched by <> in <>. This example uses the [wyvern-js](https://github.com/ProjectWyvern/wyvern-js) library.
+Matched in [0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47](https://etherscan.io/tx/0xc8b873d08d8c1f4cff43ce430f200a28998b1aebecaa8f6789b08e25c606af47). This example uses the [wyvern-js](https://github.com/ProjectWyvern/wyvern-js) library.
+
+```javascript
+const deepcopy = require('deepcopy')
+const Web3 = require('web3')
+const web3 = new Web3('https://mainnet.infura.io')
+const { WyvernProtocol } = require('wyvern-js')
+const { schemas } = require('wyvern-schemas')
+const protocolInstance = new WyvernProtocol(web3.currentProvider, { network: 'main' })
+
+const CryptoKitties = schemas.main.filter(s => s.name === 'CryptoKitties')[0]
+
+// Predetermined buyer
+const buyer = '0x0084a81668B9A978416aBEB88bC1572816cc7cAC'
+const seller = '0x0084a81668B9A978416aBEB88bC1572816cc7cAC'
+
+// Two kitties to be sold in one order
+const kitties = [
+  '591654',
+  '570186'
+]
+
+const transactions = kitties.map(kitty => {
+  const transfer = CryptoKitties.functions.transfer(kitty)
+  const encoded = web3.eth.abi.encodeFunctionCall(transfer, [buyer, kitty])
+  const calldata = encoded
+  const address = transfer.target
+  const value = '0'
+  return {
+    calldata,
+    address,
+    value
+  }
+})
+
+const atomicized = protocolInstance.wyvernAtomicizer.atomicize.getABIEncodedTransactionData(
+  transactions.map(t => t.address),
+  transactions.map(t => t.value),
+  transactions.map(t => (t.calldata.length - 2) / 2), // subtract 2 for '0x', divide by 2 for hex
+  transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
+)
+
+const calldata = atomicized
+const replacementPattern = '0x' // exact match, no replacement
+
+const sellOrder = {
+  exchange: WyvernProtocol.getExchangeContractAddress('main'),
+  maker: seller,
+  taker: buyer,
+  makerRelayerFee: '0',
+  takerRelayerFee: '0',
+  makerProtocolFee: '0',
+  takerProtocolFee: '0',
+  feeRecipient: seller,
+  feeMethod: '0',
+  side: '1',
+  saleKind: '0',
+  target: WyvernProtocol.getAtomicizerContractAddress('main'),
+  howToCall: '1', // DELEGATECALL to library
+  calldata: calldata,
+  replacementPattern: replacementPattern,
+  staticTarget: '0x0000000000000000000000000000000000000000',
+  staticExtradata: '0x',
+  paymentToken: '0x0000000000000000000000000000000000000000',
+  basePrice: '0',
+  extra: '0',
+  listingTime: '0',
+  expirationTime: '0',
+  salt: WyvernProtocol.generatePseudoRandomSalt().toString()
+}
+
+// Create the matching buy-side order
+const buyOrder = deepcopy(sellOrder)
+buyOrder.side = 0
+buyOrder.maker = buyer
+buyOrder.taker = seller
+buyOrder.feeRecipient = '0x0000000000000000000000000000000000000000'
+
+try {
+  (async () => {
+    // Check that orders can match
+    const ordersCanMatch = await protocolInstance.wyvernExchange.ordersCanMatch_.callAsync(
+      [buyOrder.exchange, buyOrder.maker, buyOrder.taker, buyOrder.feeRecipient, buyOrder.target, buyOrder.staticTarget, buyOrder.paymentToken, sellOrder.exchange, sellOrder.maker, sellOrder.taker, sellOrder.feeRecipient, sellOrder.target, sellOrder.staticTarget, sellOrder.paymentToken],
+      [buyOrder.makerRelayerFee, buyOrder.takerRelayerFee, buyOrder.makerProtocolFee, buyOrder.takerProtocolFee, buyOrder.basePrice, buyOrder.extra, buyOrder.listingTime, buyOrder.expirationTime, buyOrder.salt, sellOrder.makerRelayerFee, sellOrder.takerRelayerFee, sellOrder.makerProtocolFee, sellOrder.takerProtocolFee, sellOrder.basePrice, sellOrder.extra, sellOrder.listingTime, sellOrder.expirationTime, sellOrder.salt],
+      [buyOrder.feeMethod, buyOrder.side, buyOrder.saleKind, buyOrder.howToCall, sellOrder.feeMethod, sellOrder.side, sellOrder.saleKind, sellOrder.howToCall],
+      buyOrder.calldata,
+      sellOrder.calldata,
+      buyOrder.replacementPattern,
+      sellOrder.replacementPattern,
+      buyOrder.staticExtradata,
+      sellOrder.staticExtradata
+      )
+    console.log('ordersCanMatch: ' + ordersCanMatch)
+
+    // Encode the atomic match call
+    const matchEncoded = await protocolInstance.wyvernExchange.atomicMatch_.getABIEncodedTransactionData(
+      [buyOrder.exchange, buyOrder.maker, buyOrder.taker, buyOrder.feeRecipient, buyOrder.target, buyOrder.staticTarget, buyOrder.paymentToken, sellOrder.exchange, sellOrder.maker, sellOrder.taker, sellOrder.feeRecipient, sellOrder.target, sellOrder.staticTarget, sellOrder.paymentToken],
+      [buyOrder.makerRelayerFee, buyOrder.takerRelayerFee, buyOrder.makerProtocolFee, buyOrder.takerProtocolFee, buyOrder.basePrice, buyOrder.extra, buyOrder.listingTime, buyOrder.expirationTime, buyOrder.salt, sellOrder.makerRelayerFee, sellOrder.takerRelayerFee, sellOrder.makerProtocolFee, sellOrder.takerProtocolFee, sellOrder.basePrice, sellOrder.extra, sellOrder.listingTime, sellOrder.expirationTime, sellOrder.salt],
+      [buyOrder.feeMethod, buyOrder.side, buyOrder.saleKind, buyOrder.howToCall, sellOrder.feeMethod, sellOrder.side, sellOrder.saleKind, sellOrder.howToCall],
+      buyOrder.calldata,
+      sellOrder.calldata,
+      buyOrder.replacementPattern,
+      sellOrder.replacementPattern,
+      buyOrder.staticExtradata,
+      sellOrder.staticExtradata,
+      [27, 27], // No signatures, order previously approved
+      ['0x0000000000000000000000000000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000000000000000000000000000000']
+    )
+    console.log(matchEncoded)
+  })()
+} catch (e) {
+  console.log(e)
+}
+```
