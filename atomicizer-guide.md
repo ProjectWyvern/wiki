@@ -39,7 +39,7 @@ const transactions = [
 const params = [
   transactions.map(t => t.address),
   transactions.map(t => t.value),
-  transactions.map(t => t.calldata.length - 2), // subtract 2 for '0x'
+  transactions.map(t => (t.calldata.length - 2) / 2), // subtract 2 for '0x', divide by 2 for hex
   transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
 ]
 
@@ -69,7 +69,7 @@ const transactions = [
 const params = [
   transactions.map(t => t.address),
   transactions.map(t => t.value),
-  transactions.map(t => t.calldata.length - 2), // subtract 2 for '0x'
+  transactions.map(t => (t.calldata.length - 2) / 2), // subtract 2 for '0x', divide by 2 for hex
   transactions.map(t => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
 ]
 
